@@ -92,10 +92,7 @@ async function openDocumentPictureInPicture() {
   try {
     // biome-ignore lint/suspicious/noExplicitAny: 非標準
     const win = window as any;
-    pipWindow = await win.documentPictureInPicture.requestWindow({
-      width: el.clientWidth / 2,
-      height: el.clientHeight / 2,
-    });
+    pipWindow = await win.wrappedJSObject.documentPictureInPicture.requestWindow();
   } catch (error) {
     console.error('[nicopip]', error);
     dummyElement.remove();
@@ -110,6 +107,7 @@ async function openDocumentPictureInPicture() {
     parent.append(el);
     dummyElement.remove();
   });
+  pipWindow.document.title = "nicopip-window";
   pipWindow.document.body.style.margin = '0';
   pipWindow.document.body.style.backgroundColor = '#000000';
   pipWindow.document.body.style.overflow = 'hidden';
