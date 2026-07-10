@@ -92,7 +92,7 @@ async function openDocumentPictureInPicture() {
   try {
     // biome-ignore lint/suspicious/noExplicitAny: 非標準
     const win = window as any;
-    pipWindow = await win.wrappedJSObject.documentPictureInPicture.requestWindow();
+    pipWindow = await win.wrappedJSObject.documentPictureInPicture.requestWindow(win.structuredClone({ width: el.clientWidth / 2, height: el.clientHeight / 2}));
   } catch (error) {
     console.error('[nicopip]', error);
     dummyElement.remove();
